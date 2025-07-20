@@ -23,8 +23,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
     userType: searchParams.get('type') === 'landlord' ? 'landlord' : '',
-    userType: 'landlord', // Always landlord since only landlords register
-    agreeToTerms: false
+    userType: 'landlord' // Always landlord since only landlords register
   });
   const navigate = useNavigate();
   const { signUp, user, loading } = useAuth();
@@ -41,11 +40,6 @@ const SignUp = () => {
     
     if (formData.password !== formData.confirmPassword) {
       alert('Nywila hazifanani');
-      return;
-    }
-
-    if (!formData.agreeToTerms) {
-      alert('Unalazimika kukubali masharti na taratibu');
       return;
     }
 
@@ -72,8 +66,7 @@ const SignUp = () => {
         phone: '',
         password: '',
         confirmPassword: '',
-        userType: '',
-        agreeToTerms: false
+        userType: ''
       });
     }
 
@@ -204,7 +197,6 @@ const SignUp = () => {
                     </Button>
                   </div>
                 </div>
-
 
                 <Button 
                   type="submit" 
