@@ -37,7 +37,9 @@ import {
   Zap,
   Award,
   Building2,
-  Globe
+  Globe,
+  Eye,
+  Search
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
