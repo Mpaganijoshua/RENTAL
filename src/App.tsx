@@ -65,6 +65,7 @@ import Favorites from "./pages/Favorites";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import PropertyExample from "./pages/PropertyExample";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 /**
@@ -120,6 +121,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
+            <Route path="/about" element={<About />} />
             
             {/* User-specific routes - Njia za mtumiaji */}
             <Route path="/dashboard" element={<Dashboard />} />

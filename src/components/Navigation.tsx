@@ -68,6 +68,7 @@ const Navigation = () => {
     en: {
       home: 'Home',
       browse: 'Browse Properties',
+      about: 'About Us',
       dashboard: 'Host Dashboard',
       signIn: 'Sign In',
       signUp: 'Sign Up',
@@ -78,6 +79,7 @@ const Navigation = () => {
     sw: {
       home: 'Nyumbani',
       browse: 'Tazama Nyumba',
+      about: 'Kuhusu',
       dashboard: 'Dashibodi ya Mwenye Nyumba',
       signIn: 'Ingia',
       signUp: 'Jisajili',
@@ -129,6 +131,18 @@ const Navigation = () => {
                 }`}
               >
                 {t.browse}
+              </Button>
+            </Link>
+            
+            {/* About Us Link - Kiungo cha kuhusu */}
+            <Link to="/about">
+              <Button
+                variant="ghost"
+                className={`px-4 py-2 rounded-full hover:bg-gray-100 ${
+                  location.pathname === '/about' ? 'bg-gray-100 font-semibold' : ''
+                }`}
+              >
+                {t.about}
               </Button>
             </Link>
             
@@ -221,6 +235,18 @@ const Navigation = () => {
                 <div className="flex items-center">
                   <Search className="h-5 w-5 mr-3 text-gray-400" />
                   {t.browse}
+                </div>
+              </Link>
+              
+              {/* Mobile About Link - Kiungo cha kuhusu kwa simu */}
+              <Link
+                to="/about"
+                className="block px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center">
+                  <User className="h-5 w-5 mr-3 text-gray-400" />
+                  {t.about}
                 </div>
               </Link>
               
