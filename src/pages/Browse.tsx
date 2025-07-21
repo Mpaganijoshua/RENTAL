@@ -696,13 +696,13 @@ const Browse = () => {
             <div className="max-w-md mx-auto">
               <Search className="h-16 w-16 text-gray-300 mx-auto mb-6" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                Hakuna nyumba zilizopatikana
+                {t('browse.noPropertiesFound')}
               </h3>
               <p className="text-gray-600 mb-8">
-                Jaribu kubadilisha vigezo vya utafutaji au futa baadhi ya filters.
+                {t('browse.tryChangingFilters')}
               </p>
               <Button onClick={handleClearAllFilters} size="lg">
-                Futa Filters Zote
+                {t('browse.clearFilters')}
               </Button>
             </div>
           </div>

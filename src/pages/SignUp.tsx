@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Eye, EyeOff, Home, Check } from 'lucide-react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,7 @@ const SignUp = () => {
   });
   const navigate = useNavigate();
   const { signUp, user, loading } = useAuth();
+  const { t } = useTranslation();
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -90,68 +92,68 @@ const SignUp = () => {
               <span className="text-2xl font-bold text-primary">Nyumba Link</span>
             </Link>
             <h2 className="text-3xl font-bold text-gray-900">
-              Kuwa Mwenye Nyumba
+              {t('auth.becomeLandlord')}
             </h2>
             <p className="mt-2 text-gray-600">
-              Jisajili na uanze kutangaza nyumba zako leo
+              {t('auth.signUpSubtitle')}
             </p>
           </div>
 
           {/* Sign up form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-center">Jisajili</CardTitle>
+              <CardTitle className="text-center">{t('auth.signUp')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="fullName">Jina Kamili</Label>
+                  <Label htmlFor="fullName">{t('auth.fullName')}</Label>
                   <Input
                     id="fullName"
                     type="text"
                     value={formData.fullName}
                     onChange={(e) => handleInputChange('fullName', e.target.value)}
-                    placeholder="John Mwalimu"
+                    placeholder={t('auth.fullNamePlaceholder')}
                     required
                     className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email">Barua Pepe</Label>
+                  <Label htmlFor="email">{t('auth.email')}</Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    placeholder="mfano@barua.com"
+                    placeholder={t('auth.emailPlaceholder')}
                     required
                     className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Nambari ya Simu</Label>
+                  <Label htmlFor="phone">{t('auth.phone')}</Label>
                   <Input
                     id="phone"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="+255712345678"
+                    placeholder={t('auth.phonePlaceholder')}
                     required
                     className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="password">Nywila</Label>
+                  <Label htmlFor="password">{t('auth.password')}</Label>
                   <div className="relative mt-1">
                     <Input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      placeholder="Weka nywila yenye urefu wa angalau herufi 8"
+                      placeholder={t('auth.passwordRequirement')}
                       required
                       minLength={8}
                     />
@@ -172,14 +174,14 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="confirmPassword">Hakikisha Nywila</Label>
+                  <Label htmlFor="confirmPassword">{t('auth.confirmPassword')}</Label>
                   <div className="relative mt-1">
                     <Input
                       id="confirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                      placeholder="Andika nywila tena"
+                      placeholder={t('auth.confirmPasswordPlaceholder')}
                       required
                     />
                     <Button
@@ -203,15 +205,15 @@ const SignUp = () => {
                   className="w-full bg-primary hover:bg-primary/90"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Inasubiri...' : 'Jisajili kama Mwenye Nyumba'}
+                  {isLoading ? t('auth.registering') : t('auth.registerAsLandlord')}
                 </Button>
               </form>
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
-                  Tayari una akaunti?{' '}
+                  {t('auth.alreadyHaveAccount')}{' '}
                   <Link to="/signin" className="text-primary hover:underline font-medium">
-                    Ingia hapa
+                    {t('auth.signInHere')}
                   </Link>
                 </p>
               </div>
@@ -222,14 +224,14 @@ const SignUp = () => {
           <div className="bg-blue-50 rounded-lg p-4">
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
               <Check className="h-4 w-4 mr-2" />
-              Faida za kuwa mwenye nyumba:
+              {t('auth.landlordBenefits')}
             </h3>
             <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Tangaza nyumba zako kwa bure</li>
-              <li>• Pata wapangaji wa haraka</li>
-              <li>• Simamia matangazo yako kwa urahisi</li>
-              <li>• Wasiliana na wapangaji moja kwa moja</li>
-              <li>• Pata takwimu za matangazo yako</li>
+              <li>{t('auth.freeListings')}</li>
+              <li>{t('auth.findTenants')}</li>
+              <li>{t('auth.manageListings')}</li>
+              <li>{t('auth.directContact')}</li>
+              <li>{t('auth.getAnalytics')}</li>
             </ul>
           </div>
         </div>

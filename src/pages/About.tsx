@@ -42,6 +42,7 @@ import {
   Search
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 /**
  * ABOUT US PAGE COMPONENT
@@ -61,10 +62,10 @@ const About = () => {
    * Key metrics and achievements of the platform.
    */
   const stats = [
-    { icon: Building2, number: '1000+', label: 'Nyumba Zilizosajiliwa' },
-    { icon: Users, number: '500+', label: 'Wenye Nyumba' },
-    { icon: Globe, number: '50+', label: 'Miji' },
-    { icon: Star, number: '5000+', label: 'Watumiaji Wenye Furaha' }
+    { icon: Building2, number: '1000+', label: t('about.registeredProperties') },
+    { icon: Users, number: '500+', label: t('about.landlords') },
+    { icon: Globe, number: '50+', label: t('about.cities') },
+    { icon: Star, number: '5000+', label: t('about.happyUsers') }
   ];
 
   /**
@@ -76,23 +77,23 @@ const About = () => {
   const values = [
     {
       icon: Shield,
-      title: 'Usalama',
-      description: 'Tunahakikisha usalama wa data na mawasiliano ya watumiaji wetu wote.'
+      title: t('about.security'),
+      description: t('about.securityText')
     },
     {
       icon: Zap,
-      title: 'Urahisi',
-      description: 'Tumefanya mfumo wetu kuwa rahisi kutumia kwa kila mtu.'
+      title: t('about.simplicity'),
+      description: t('about.simplicityText')
     },
     {
       icon: Heart,
-      title: 'Uaminifu',
-      description: 'Tunajenga uhusiano wa uaminifu kati ya wenye nyumba na wapangaji.'
+      title: t('about.trust'),
+      description: t('about.trustText')
     },
     {
       icon: Award,
-      title: 'Ubora',
-      description: 'Tunatoa huduma za ubora wa juu kwa kila mtumiaji.'
+      title: t('about.excellence'),
+      description: t('about.excellenceText')
     }
   ];
 
@@ -105,20 +106,20 @@ const About = () => {
   const team = [
     {
       name: 'StarLabs AI',
-      role: 'Mtengenezaji Mkuu',
-      description: 'Timu ya wataalamu wa teknolojia ya AI inayolenga kuboresha maisha ya Watanzania.',
+      role: t('about.leadDeveloper'),
+      description: t('about.aiTeamDescription'),
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face'
     },
     {
-      name: 'Timu ya Maendeleo',
-      role: 'Wabunifu wa Mfumo',
-      description: 'Watengenezaji wenye ujuzi wa kubuni na kujenga mifumo ya kisasa.',
+      name: t('about.developmentTeam'),
+      role: t('about.systemCreators'),
+      description: t('about.developersDescription'),
       image: 'https://images.unsplash.com/photo-1522075469751-3847ae2c3d8c?w=300&h=300&fit=crop&crop=face'
     },
     {
-      name: 'Timu ya Huduma',
-      role: 'Msaada wa Wateja',
-      description: 'Timu inayojitoa kutoa msaada wa haraka na wa ubora kwa watumiaji.',
+      name: t('about.serviceTeam'),
+      role: t('about.customerSupport'),
+      description: t('about.supportDescription'),
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face'
     }
   ];
@@ -142,11 +143,10 @@ const About = () => {
             </div>
             
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              Kuhusu Nyumba Link
+              {t('about.title')}
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Nyumba Link ni jukwaa la kisasa la kutafuta na kutoa nyumba nchini Tanzania. 
-              Tunawachanganya wenye nyumba na wapangaji kwa njia ya kisasa, salama na ya haraka.
+              {t('about.subtitle')}
             </p>
           </div>
         </div>
@@ -161,12 +161,10 @@ const About = () => {
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
                   <Target className="h-8 w-8 text-primary mr-4" />
-                  <h2 className="text-3xl font-bold text-gray-900">Dhamira Yetu</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">{t('about.mission')}</h2>
                 </div>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Kurahisisha mchakato wa kutafuta na kutoa nyumba nchini Tanzania kwa kutumia 
-                  teknolojia ya kisasa. Tunalenga kujenga mazingira ya uaminifu na usalama kwa 
-                  wenye nyumba na wapangaji.
+                  {t('about.missionText')}
                 </p>
               </CardContent>
             </Card>
@@ -176,11 +174,10 @@ const About = () => {
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
                   <Eye className="h-8 w-8 text-primary mr-4" />
-                  <h2 className="text-3xl font-bold text-gray-900">Maono Yetu</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">{t('about.vision')}</h2>
                 </div>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Kuwa jukwaa la kwanza la nyumba nchini Tanzania na Afrika Mashariki, 
-                  linalotoa huduma bora za kutafuta makazi kwa kila Mtanzania.
+                  {t('about.visionText')}
                 </p>
               </CardContent>
             </Card>
@@ -193,10 +190,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Mafanikio Yetu
+              {t('about.achievements')}
             </h2>
             <p className="text-xl text-gray-600">
-              Takwimu zinazosema mengi kuhusu utendaji wetu
+              {t('about.achievementsSubtitle')}
             </p>
           </div>
 
@@ -225,10 +222,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Maadili Yetu
+              {t('about.values')}
             </h2>
             <p className="text-xl text-gray-600">
-              Misingi inayotuongoza katika kila kitu tunachofanya
+              {t('about.valuesSubtitle')}
             </p>
           </div>
 
@@ -257,10 +254,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Timu Yetu
+              {t('about.team')}
             </h2>
             <p className="text-xl text-gray-600">
-              Watu wanaofanya Nyumba Link kuwa la kipekee
+              {t('about.teamSubtitle')}
             </p>
           </div>
 
@@ -296,10 +293,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Wasiliana Nasi
+              {t('about.contact')}
             </h2>
             <p className="text-xl text-gray-600">
-              Tuko hapa kukusaidia kila wakati
+              {t('about.contactSubtitle')}
             </p>
           </div>
 
@@ -311,10 +308,10 @@ const About = () => {
                   <Phone className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Piga Simu
+                  {t('about.callUs')}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Wasiliana nasi moja kwa moja
+                  {t('about.callDescription')}
                 </p>
                 <a 
                   href="tel:+255750929317"
@@ -332,10 +329,10 @@ const About = () => {
                   <Mail className="h-8 w-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Barua Pepe
+                  {t('about.email')}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Tuma ujumbe wako
+                  {t('about.emailDescription')}
                 </p>
                 <a 
                   href="mailto:info@nyumbalink.co.tz"
@@ -353,10 +350,10 @@ const About = () => {
                   <MapPin className="h-8 w-8 text-purple-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Mahali
+                  {t('about.location')}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Ofisi yetu kuu
+                  {t('about.locationDescription')}
                 </p>
                 <p className="text-primary font-semibold">
                   Dar es Salaam, Tanzania
@@ -371,16 +368,16 @@ const About = () => {
       <section className="py-20 bg-gradient-to-r from-primary to-serengeti-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Tayari Kuanza Safari Yako?
+            {t('about.readyToStart')}
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Jiunge na maelfu ya Watanzania wanaotumia Nyumba Link kupata na kutoa nyumba.
+            {t('about.joinThousands')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup?type=landlord">
               <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
                 <Home className="h-5 w-5 mr-2" />
-                Jisajili Kama Mwenye Nyumba
+                {t('about.registerAsLandlord')}
               </Button>
             </Link>
             <Link to="/browse">
@@ -390,7 +387,7 @@ const About = () => {
                 className="border-white text-white hover:bg-white hover:text-primary"
               >
                 <Search className="h-5 w-5 mr-2" />
-                Tafuta Nyumba
+                {t('about.searchHouses')}
               </Button>
             </Link>
           </div>

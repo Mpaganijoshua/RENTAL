@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff, Home } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +19,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { signIn, user, loading } = useAuth();
+  const { t } = useTranslation();
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -56,42 +58,42 @@ const SignIn = () => {
               <span className="text-2xl font-bold text-primary">Nyumba Link</span>
             </Link>
             <h2 className="text-3xl font-bold text-gray-900">
-              Karibu Tena!
+              {t('auth.welcomeBack')}
             </h2>
             <p className="mt-2 text-gray-600">
-              Ingia kwenye akaunti yako ya Nyumba Link
+              {t('auth.signInSubtitle')}
             </p>
           </div>
 
           {/* Sign in form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-center">Ingia</CardTitle>
+              <CardTitle className="text-center">{t('auth.signIn')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="email">Barua Pepe</Label>
+                  <Label htmlFor="email">{t('auth.email')}</Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    placeholder="mfano@barua.com"
+                    placeholder={t('auth.emailPlaceholder')}
                     required
                     className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="password">Nywila</Label>
+                  <Label htmlFor="password">{t('auth.password')}</Label>
                   <div className="relative mt-1">
                     <Input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      placeholder="Weka nywila yako"
+                      placeholder={t('auth.passwordPlaceholder')}
                       required
                     />
                     <Button
@@ -113,10 +115,10 @@ const SignIn = () => {
                 <div className="flex items-center justify-between">
                   <label className="flex items-center">
                     <input type="checkbox" className="mr-2" />
-                    <span className="text-sm text-gray-600">Nikumbuke</span>
+                    <span className="text-sm text-gray-600">{t('auth.rememberMe')}</span>
                   </label>
                   <Link to="/forgot-password" className="text-sm text-primary hover:underline">
-                    Umesahau nywila?
+                    {t('auth.forgotPassword')}
                   </Link>
                 </div>
 
@@ -125,15 +127,15 @@ const SignIn = () => {
                   className="w-full bg-primary hover:bg-primary/90"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Inasubiri...' : 'Ingia'}
+                  {isLoading ? t('auth.signing') : t('auth.signIn')}
                 </Button>
               </form>
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
-                  Huna akaunti?{' '}
+                  {t('auth.noAccount')}{' '}
                   <Link to="/signup" className="text-primary hover:underline font-medium">
-                    Jisajili hapa
+                    {t('auth.signUpHere')}
                   </Link>
                 </p>
               </div>
@@ -143,13 +145,13 @@ const SignIn = () => {
           {/* Info card */}
           <div className="bg-blue-50 rounded-lg p-4">
             <h3 className="font-semibold text-blue-900 mb-2">
-              Kwa nini ujisajili?
+              {t('auth.whyRegister')}
             </h3>
             <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Okoa nyumba unazozipenda</li>
-              <li>• Pata arifa za nyumba mpya</li>
-              <li>• Wasiliana na wenye nyumba</li>
-              <li>• Weka tangazo la nyumba yako</li>
+              <li>{t('auth.saveProperties')}</li>
+              <li>{t('auth.getNotifications')}</li>
+              <li>{t('auth.contactLandlords')}</li>
+              <li>{t('auth.listProperty')}</li>
             </ul>
           </div>
         </div>
