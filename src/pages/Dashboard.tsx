@@ -38,6 +38,7 @@ import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 // Type definitions for better type safety
@@ -109,6 +110,7 @@ interface UIState {
 const Dashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   
   // Centralized UI state management
   const [uiState, setUIState] = useState<UIState>({
@@ -457,7 +459,7 @@ const Dashboard = () => {
 
   const showSuccessToast = (message: string): void => {
     toast({
-      title: "Umefanikiwa!",
+      title: t('common.success'),
       description: message
     });
   };
@@ -465,7 +467,7 @@ const Dashboard = () => {
   const showErrorToast = (message: string): void => {
     toast({
       variant: "destructive",
-      title: "Hitilafu",
+      title: t('common.error'),
       description: message
     });
   };
@@ -482,7 +484,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-center py-16">
             <div className="text-center">
               <RefreshCw className="h-12 w-12 text-primary mx-auto mb-4 animate-spin" />
-              <p className="text-lg text-gray-600">Inapakia dashibodi yako...</p>
+              <p className="text-lg text-gray-600">{t('dashboard.loading')}</p>
             </div>
           </div>
         </div>

@@ -20,6 +20,7 @@
 import React from 'react';
 import StatsCard from './StatsCard';
 import { Home, Eye, TrendingUp, DollarSign } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Property = Tables<'properties'>;
@@ -39,6 +40,8 @@ interface StatsSectionProps {
  * kuhusu nyumba za mtumiaji na utendaji wao.
  */
 const StatsSection: React.FC<StatsSectionProps> = ({ properties }) => {
+  const { t } = useTranslation();
+
   /**
    * STATISTICS CALCULATION FUNCTIONS
    * ================================
@@ -70,28 +73,28 @@ const StatsSection: React.FC<StatsSectionProps> = ({ properties }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <StatsCard
-        title="Jumla ya Nyumba"
+        title={t('dashboard.totalProperties')}
         value={properties.length}
         icon={Home}
         trend={{ value: 12, isPositive: true }}
         gradient="bg-gradient-to-br from-blue-500 to-blue-600"
       />
       <StatsCard
-        title="Jumla ya Miwani"
+        title={t('dashboard.totalViews')}
         value={getTotalViews()}
         icon={Eye}
         trend={{ value: 8, isPositive: true }}
         gradient="bg-gradient-to-br from-green-500 to-green-600"
       />
       <StatsCard
-        title="Nyumba Zinazoonekana"
+        title={t('dashboard.activeProperties')}
         value={getActivePropertiesCount()}
         icon={TrendingUp}
         trend={{ value: 5, isPositive: true }}
         gradient="bg-gradient-to-br from-purple-500 to-purple-600"
       />
       <StatsCard
-        title="Bei ya Wastani"
+        title={t('dashboard.averagePrice')}
         value={getAveragePrice() ? `TZS ${Math.round(getAveragePrice()).toLocaleString()}` : 'TZS 0'}
         icon={DollarSign}
         gradient="bg-gradient-to-br from-orange-500 to-orange-600"

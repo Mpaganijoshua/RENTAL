@@ -10,6 +10,7 @@ import {
   Sparkles,
   TrendingUp
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Profile = Tables<'profiles'>;
@@ -31,6 +32,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
   onDismissWelcome,
   propertiesCount
 }) => {
+  const { t } = useTranslation();
+
   const getProfileCompletion = () => {
     if (!profile) return 0;
     let completion = 0;
@@ -52,12 +55,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
               <div className="flex items-center space-x-2">
                 <Sparkles className="h-6 w-6" />
                 <h2 className="text-3xl font-bold">
-                  🎉 Karibu kwenye Nyumba Link!
+                  🎉 {t('dashboard.welcome')}
                 </h2>
               </div>
               <p className="text-xl opacity-90 max-w-2xl">
-                Anza safari yako ya kuongeza nyumba zako na kupata wapangaji. 
-                Tutakuongoza hatua kwa hatua!
+                {t('dashboard.welcomeMessage')}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button 
@@ -65,13 +67,13 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                   className="bg-white text-primary hover:bg-gray-100"
                 >
                   <User className="h-4 w-4 mr-2" />
-                  Kamilisha Akaunti
+                  {t('dashboard.completeAccount')}
                 </Button>
                 <Button 
                   variant="outline" 
                   className="border-white text-white hover:bg-white hover:text-primary"
                 >
-                  Ona Mwongozo
+                  {t('dashboard.viewGuide')}
                 </Button>
               </div>
             </div>
@@ -106,7 +108,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             </div>
             <div className="space-y-1">
               <h1 className="text-2xl font-bold text-gray-900">
-                Karibu, {profile?.full_name || 'Mwenye Nyumba'}! 👋
+                {t('dashboard.welcomeUser', { name: profile?.full_name || 'Mwenye Nyumba' })}
               </h1>
               <p className="text-gray-600">
                 {user?.email}
@@ -125,7 +127,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex items-center space-x-3">
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">{propertiesCount}</div>
-                <div className="text-xs text-gray-600">Nyumba</div>
+                <div className="text-xs text-gray-600">{t('dashboard.properties')}</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center space-x-1">
@@ -136,7 +138,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     <AlertCircle className="h-4 w-4 text-orange-500" />
                   )}
                 </div>
-                <div className="text-xs text-gray-600">Akaunti</div>
+                <div className="text-xs text-gray-600">{t('dashboard.account')}</div>
               </div>
             </div>
 
@@ -147,7 +149,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
               className={!isProfileComplete ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
             >
               <Settings className="h-4 w-4 mr-2" />
-              {isProfileComplete ? 'Sasisha Akaunti' : 'Kamilisha Akaunti'}
+              {isProfileComplete ? t('dashboard.updateAccount') : t('dashboard.completeAccountAction')}
             </Button>
           </div>
         </div>
@@ -156,7 +158,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         {!isProfileComplete && (
           <div className="mt-6 pt-4 border-t">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Maendeleo ya Akaunti</span>
+              <span className="text-sm font-medium text-gray-700">{t('dashboard.accountProgress')}</span>
               <span className="text-sm text-gray-600">{profileCompletion}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -166,7 +168,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
               />
             </div>
             <p className="text-xs text-gray-600 mt-2">
-              Kamilisha maelezo yako ili kupata huduma bora zaidi
+              {t('dashboard.completeInfo')}
             </p>
           </div>
         )}

@@ -7,6 +7,7 @@ import { Upload, X, Image } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 interface ImageUploadProps {
   images: string[];
@@ -21,6 +22,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 }) => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [uploading, setUploading] = useState(false);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,8 +32,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     if (images.length + files.length > maxImages) {
       toast({
         variant: "destructive",
-        title: "Hitilafu",
-        description: `Unaweza kupakia picha ${maxImages} tu`
+        title: t('common.error'),
+        description: t('dashboard.canAddMore', { remaining: maxImages })
       });
       return;
     }
@@ -47,8 +49,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         if (!file.type.startsWith('image/')) {
           toast({
             variant: "destructive",
-            title: "Hitilafu",
-            description: "Tafadhali chagua picha tu"
+            title: t('common.error'),
+            description: "Please select images only"
           });
           continue;
         }
@@ -57,8 +59,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         if (file.size > 5 * 1024 * 1024) {
           toast({
             variant: "destructive",
-            title: "Hitilafu",
-            description: "Ukubwa wa picha haupaswi kuzidi MB 5"
+            title: t('common.error'),
+            description: "Image size should not exceed 5MB"
           });
           continue;
         }
@@ -83,15 +85,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       onImagesChange([...images, ...newImageUrls]);
       
       toast({
-        title: "Umefanikiwa!",
-        description: "Picha zimepakiwa kikamilifu"
+        title: t('common.success'),
+        description: "Images uploaded successfully"
       });
     } catch (error) {
       console.error('Error uploading images:', error);
       toast({
         variant: "destructive",
-        title: "Hitilafu",
-        description: "Imeshindikana kupakia picha"
+        title: t('common.error'),
+        description: "Failed to upload images"
       });
     } finally {
       setUploading(false);
@@ -107,7 +109,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div className="space-y-4">
-      <Label>Picha za Nyumba ({images.length}/{maxImages})</Label>
+      <Label>{t('dashboard.propertyImages', { current: images.length, max: maxImages })}</Label>
       
       {/* Upload button */}
       <div className="flex items-center gap-4">
@@ -129,11 +131,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           }`}
         >
           <Upload className="h-4 w-4" />
-          {uploading ? 'Inapakia...' : 'Chagua Picha'}
+          {uploading ? t('dashboard.uploading') : t('dashboard.selectImages')}
         </Label>
         {images.length < maxImages && (
           <span className="text-sm text-gray-600">
-            Unaweza kuongeza picha {maxImages - images.length} zaidi
+            {t('dashboard.canAddMore', { remaining: maxImages - images.length })}
           </span>
         )}
       </div>
@@ -172,8 +174,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       {images.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           <Image className="h-12 w-12 mx-auto mb-2 text-gray-400" />
-          <p>Hakuna picha zilizochaguliwa</p>
-          <p className="text-sm">Chagua picha za nyumba yako</p>
+          <p>{t('dashboard.noImagesSelected')}</p>
+          <p className="text-sm">{t('dashboard.selectPropertyImages')}</p>
         </div>
       )}
     </div>

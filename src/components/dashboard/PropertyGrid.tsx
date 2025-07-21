@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Home, Plus, Eye, Edit, Trash2, Phone, MapPin, DollarSign } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Property } from '@/hooks/useProperties';
 
 /**
@@ -32,6 +33,8 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
   onDelete,
   onAddProperty
 }) => {
+  const { t } = useTranslation();
+
   /**
    * Handles navigation to property example page
    */
@@ -54,13 +57,13 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
         {/* Welcome Message */}
         <div className="space-y-2">
           <h3 className="text-xl font-semibold text-gray-900">
-            Karibu NyumbaLink!
+            {t('dashboard.welcomeToNyumbaLink')}
           </h3>
           <p className="text-gray-600 max-w-md mx-auto">
-            Huna nyumba zozote bado. Anza safari yako ya kutangaza nyumba na kupata wapangaji.
+              {t('dashboard.yourProperties', { count: properties.length })}
           </p>
         </div>
-
+              {t('dashboard.manageProperties')}
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
           <Button 
@@ -68,7 +71,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
             className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            Ongeza Nyumba ya Kwanza
+            {t('dashboard.addFirstPropertyAction')}
           </Button>
           
           <Button 
@@ -77,14 +80,14 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
             className="border-primary text-primary hover:bg-primary/10 px-6 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
           >
             <Eye className="w-5 h-5" />
-            Ona Mfano
+            {t('dashboard.addProperty')}
           </Button>
         </div>
 
         {/* Helpful Tips */}
         <div className="bg-primary/10 rounded-lg p-4 mt-6">
           <p className="text-sm text-primary">
-            💡 <strong>Kidokezo:</strong> Tangazo zuri linahitaji picha nzuri, maelezo kamili, na bei ya haki.
+            {t('dashboard.goodListingTip')}
           </p>
         </div>
       </CardContent>
@@ -117,7 +120,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
               variant={property.is_rented ? "secondary" : "default"}
               className={property.is_rented ? "bg-gray-500" : "bg-green-500"}
             >
-              {property.is_rented ? "Imepangwa" : "Inapatikana"}
+              {property.is_rented ? t('dashboard.rented') : t('dashboard.available')}
             </Badge>
           </div>
         </div>
@@ -161,7 +164,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
               className="flex-1 flex items-center gap-2"
             >
               <Edit className="w-4 h-4" />
-              Hariri
+              {t('dashboard.edit')}
             </Button>
             <Button
               variant="outline"
@@ -170,7 +173,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
               className="flex-1 flex items-center gap-2 text-red-600 border-red-200 hover:bg-red-50"
             >
               <Trash2 className="w-4 h-4" />
-              Futa
+              {t('dashboard.delete')}
             </Button>
           </div>
         </div>

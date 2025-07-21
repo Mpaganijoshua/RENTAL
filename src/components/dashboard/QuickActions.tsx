@@ -12,6 +12,7 @@ import {
   Zap,
   Headphones
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface QuickActionsProps {
   onAddProperty: () => void;
@@ -28,11 +29,13 @@ const QuickActions: React.FC<QuickActionsProps> = ({
   isNewUser,
   propertiesCount
 }) => {
+  const { t } = useTranslation();
+
   const actions = [
     {
       id: 'add-property',
-      title: isNewUser ? 'Ongeza Nyumba ya Kwanza!' : 'Ongeza Nyumba Mpya',
-      description: isNewUser ? 'Anza safari yako ya kuongeza nyumba' : 'Ongeza nyumba mpya kwenye orodha',
+      title: isNewUser ? t('dashboard.addFirstProperty') : t('dashboard.addNewProperty'),
+      description: isNewUser ? t('dashboard.startJourney') : t('dashboard.addToList'),
       icon: Plus,
       onClick: onAddProperty,
       primary: true,
@@ -41,8 +44,8 @@ const QuickActions: React.FC<QuickActionsProps> = ({
     },
     {
       id: 'edit-profile',
-      title: 'Sasisha Akaunti',
-      description: 'Badilisha maelezo ya akaunti yako',
+      title: t('dashboard.updateAccountInfo'),
+      description: t('dashboard.changeAccountDetails'),
       icon: User,
       onClick: onEditProfile,
       primary: false,
@@ -50,8 +53,8 @@ const QuickActions: React.FC<QuickActionsProps> = ({
     },
     {
       id: 'view-analytics',
-      title: 'Angalia Takwimu',
-      description: 'Ona utendaji wa nyumba zako',
+      title: t('dashboard.viewAnalytics'),
+      description: t('dashboard.viewPerformance'),
       icon: BarChart3,
       onClick: () => console.log('Analytics clicked'),
       primary: false,
@@ -60,8 +63,8 @@ const QuickActions: React.FC<QuickActionsProps> = ({
     },
     {
       id: 'help',
-      title: 'Msaada wa Haraka',
-      description: 'Wasiliana na timu yetu ya msaada',
+      title: t('dashboard.quickHelp'),
+      description: t('dashboard.contactSupport'),
       icon: Headphones,
       onClick: onShowHelp,
       primary: false,
@@ -92,7 +95,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({
             {action.highlight && (
               <div className="mt-3">
                 <div className="flex items-center justify-center text-xs text-primary font-medium">
-                  <Zap className="h-3 w-3 mr-1" />
+                    {t('dashboard.startNow')}
                   Anza Sasa!
                 </div>
               </div>

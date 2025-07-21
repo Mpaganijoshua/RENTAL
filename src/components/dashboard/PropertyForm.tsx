@@ -27,6 +27,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { X, Save, RefreshCw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Property = Tables<'properties'>;
@@ -92,6 +93,8 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   onInputChange,
   onServiceToggle
 }) => {
+  const { t } = useTranslation();
+
   if (!isOpen) return null;
 
   /**
@@ -103,18 +106,18 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   const renderBasicInformationFields = () => (
     <div className="space-y-4">
       <div>
-        <Label htmlFor="title">Jina la Nyumba *</Label>
+        <Label htmlFor="title">{t('dashboard.propertyName')} *</Label>
         <Input
           id="title"
           value={formData.title}
           onChange={(e) => onInputChange('title', e.target.value)}
-          placeholder="Mfano: Nyumba ya Kisasa Mikocheni"
+          placeholder={t('dashboard.propertyNameExample')}
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="price">Bei ya Kodi (TZS) *</Label>
+        <Label htmlFor="price">{t('dashboard.rentPrice')} *</Label>
         <Input
           id="price"
           type="number"
@@ -126,34 +129,34 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
       </div>
 
       <div>
-        <Label htmlFor="location">Eneo *</Label>
+        <Label htmlFor="location">{t('dashboard.area')} *</Label>
         <Input
           id="location"
           value={formData.location}
           onChange={(e) => onInputChange('location', e.target.value)}
-          placeholder="Mikocheni, Dar es Salaam"
+          placeholder={t('dashboard.areaExample')}
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="property_type">Aina ya Nyumba</Label>
+        <Label htmlFor="property_type">{t('dashboard.propertyType')}</Label>
         <Select value={formData.property_type} onValueChange={(value) => onInputChange('property_type', value)}>
           <SelectTrigger>
-            <SelectValue placeholder="Chagua aina ya nyumba" />
+            <SelectValue placeholder={t('dashboard.selectPropertyType')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="apartment">Ghorofa</SelectItem>
-            <SelectItem value="house">Nyumba</SelectItem>
-            <SelectItem value="room">Chumba</SelectItem>
-            <SelectItem value="studio">Studio</SelectItem>
+            <SelectItem value="apartment">{t('dashboard.apartment')}</SelectItem>
+            <SelectItem value="house">{t('dashboard.house')}</SelectItem>
+            <SelectItem value="room">{t('dashboard.room')}</SelectItem>
+            <SelectItem value="studio">{t('dashboard.studio')}</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="bedrooms">Vyumba vya Kulala</Label>
+          <Label htmlFor="bedrooms">{t('dashboard.bedrooms')}</Label>
           <Input
             id="bedrooms"
             type="number"
@@ -163,7 +166,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           />
         </div>
         <div>
-          <Label htmlFor="bathrooms">Vyumba vya Kuogea</Label>
+          <Label htmlFor="bathrooms">{t('dashboard.bathrooms')}</Label>
           <Input
             id="bathrooms"
             type="number"
@@ -185,26 +188,26 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   const renderDescriptionAndFeaturesFields = () => (
     <div className="space-y-4">
       <div>
-        <Label htmlFor="description">Maelezo *</Label>
+        <Label htmlFor="description">{t('dashboard.description')} *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => onInputChange('description', e.target.value)}
-          placeholder="Elezea nyumba yako kwa undani..."
+          placeholder={t('dashboard.describeProperty')}
           rows={4}
           required
         />
       </div>
 
       <div>
-        <Label>Huduma za Msingi</Label>
+        <Label>{t('dashboard.basicServices')}</Label>
         <div className="space-y-3 mt-2">
           {[
-            { key: 'electricity', label: 'Umeme' },
-            { key: 'water', label: 'Maji' },
-            { key: 'furnished', label: 'Vifaa vya Nyumbani' },
-            { key: 'parking', label: 'Mahali pa Kuegesha Gari' },
-            { key: 'security', label: 'Usalama' }
+            { key: 'electricity', label: t('dashboard.electricity') },
+            { key: 'water', label: t('dashboard.water') },
+            { key: 'furnished', label: t('dashboard.furniture') },
+            { key: 'parking', label: t('dashboard.parking') },
+            { key: 'security', label: t('dashboard.security') }
           ].map(({ key, label }) => (
             <div key={key} className="flex items-center justify-between">
               <span>{label}</span>
@@ -218,7 +221,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
       </div>
 
       <div>
-        <Label>Huduma za Karibu</Label>
+        <Label>{t('dashboard.nearbyServices')}</Label>
         <div className="grid grid-cols-2 gap-2 mt-2">
           {['school', 'hospital', 'market', 'bank', 'transport'].map((service) => (
             <label key={service} className="flex items-center space-x-2">
@@ -228,10 +231,10 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                 onChange={() => onServiceToggle(service)}
               />
               <span className="text-sm">
-                {service === 'school' ? 'Shule' :
-                 service === 'hospital' ? 'Hospitali' :
-                 service === 'market' ? 'Soko' :
-                 service === 'bank' ? 'Benki' : 'Usafiri'}
+                {service === 'school' ? t('dashboard.school') :
+                 service === 'hospital' ? t('dashboard.hospital') :
+                 service === 'market' ? t('dashboard.market') :
+                 service === 'bank' ? t('dashboard.bank') : t('dashboard.transport')}
               </span>
             </label>
           ))}
@@ -249,7 +252,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   const renderContactInformationFields = () => (
     <div className="space-y-4">
       <div>
-        <Label htmlFor="contact_phone">Nambari ya Simu ya Mawasiliano *</Label>
+        <Label htmlFor="contact_phone">{t('dashboard.contactPhone')} *</Label>
         <Input
           id="contact_phone"
           type="tel"
@@ -259,12 +262,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           required
         />
         <p className="text-xs text-gray-500 mt-1">
-          Nambari hii itaonekana kwa wapangaji wanaotaka kuwasiliana nawe
+          {t('dashboard.contactPhoneDescription')}
         </p>
       </div>
 
       <div>
-        <Label htmlFor="contact_whatsapp_phone">Nambari ya WhatsApp</Label>
+        <Label htmlFor="contact_whatsapp_phone">{t('dashboard.whatsappNumber')}</Label>
         <Input
           id="contact_whatsapp_phone"
           type="tel"
@@ -273,7 +276,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           placeholder="+255712345678"
         />
         <p className="text-xs text-gray-500 mt-1">
-          Nambari ya WhatsApp kwa mawasiliano ya haraka (hiari)
+          {t('dashboard.whatsappOptional')}
         </p>
       </div>
     </div>
@@ -293,7 +296,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         onClick={onClose}
         disabled={submitting}
       >
-        Sitisha
+        {t('dashboard.cancel')}
       </Button>
       <Button 
         type="submit" 
@@ -303,12 +306,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         {submitting ? (
           <>
             <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-            {editingProperty ? 'Inasasisha...' : 'Inaongeza...'}
+            {editingProperty ? t('dashboard.updating') : t('dashboard.adding')}
           </>
         ) : (
           <>
             <Save className="h-4 w-4 mr-2" />
-            {editingProperty ? 'Sasisha Nyumba' : 'Ongeza Nyumba'}
+            {editingProperty ? t('dashboard.updatePropertyAction') : t('dashboard.addPropertyAction')}
           </>
         )}
       </Button>
@@ -321,7 +324,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         <CardHeader className="border-b">
           <div className="flex justify-between items-center">
             <CardTitle className="text-2xl">
-              {editingProperty ? 'Sasisha Nyumba' : 'Ongeza Nyumba Mpya'}
+              {editingProperty ? t('dashboard.updateProperty') : t('dashboard.addNewPropertyTitle')}
             </CardTitle>
             <Button 
               variant="ghost" 

@@ -34,6 +34,7 @@ import {
   Star,
   X
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Interface for component props
@@ -68,6 +69,8 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
   isOpen,
   onClose 
 }) => {
+  const { t } = useTranslation();
+
   /**
    * PHONE CALL HANDLER
    * ==================
@@ -88,7 +91,7 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
    */
   const handleWhatsAppChat = (): void => {
     const message = encodeURIComponent(
-      'Hujambo! Mimi ni mwenye nyumba kwenye Nyumba Link na nahitaji msaada. Tafadhali nisaidieni.'
+      'Hello! I am a landlord on Nyumba Link and I need help. Please assist me.'
     );
     const whatsappUrl = `https://wa.me/${SUPPORT_PHONE.replace(/[^0-9]/g, '')}?text=${message}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -107,8 +110,8 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
         <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-2">
           <Clock className="h-6 w-6 text-green-600" />
         </div>
-        <div className="text-sm font-semibold text-gray-900">Dakika 5</div>
-        <div className="text-xs text-gray-600">Muda wa kujibu</div>
+        <div className="text-sm font-semibold text-gray-900">5 {t('dashboard.minutes')}</div>
+        <div className="text-xs text-gray-600">{t('dashboard.responseTime')}</div>
       </div>
       
       <div className="text-center">
@@ -116,7 +119,7 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
           <Users className="h-6 w-6 text-blue-600" />
         </div>
         <div className="text-sm font-semibold text-gray-900">1000+</div>
-        <div className="text-xs text-gray-600">Wenye nyumba</div>
+        <div className="text-xs text-gray-600">{t('dashboard.landlords')}</div>
       </div>
       
       <div className="text-center">
@@ -124,7 +127,7 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
           <Star className="h-6 w-6 text-yellow-600" />
         </div>
         <div className="text-sm font-semibold text-gray-900">4.9/5</div>
-        <div className="text-xs text-gray-600">Ukarimu</div>
+        <div className="text-xs text-gray-600">{t('dashboard.rating')}</div>
       </div>
     </div>
   );
@@ -144,7 +147,7 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
         className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
       >
         <Phone className="h-6 w-6 mr-3" />
-        Piga Simu Sasa
+        {t('dashboard.callNow')}
         <Badge className="ml-3 bg-blue-500 text-white border-0">
           {SUPPORT_HOURS}
         </Badge>
@@ -156,9 +159,9 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
         className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
       >
         <MessageCircle className="h-6 w-6 mr-3" />
-        Ongea WhatsApp
+        {t('dashboard.chatWhatsApp')}
         <Badge className="ml-3 bg-green-500 text-white border-0">
-          Haraka
+          {t('dashboard.fast')}
         </Badge>
       </Button>
     </div>
@@ -176,27 +179,27 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
       <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
         <h4 className="font-semibold text-blue-900 mb-2 flex items-center">
           <Headphones className="h-4 w-4 mr-2" />
-          Jinsi ya Kupata Msaada
+          {t('dashboard.howToGetHelp')}
         </h4>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Piga simu au tuma ujumbe WhatsApp</li>
-          <li>• Eleza tatizo lako kwa ufupi</li>
-          <li>• Toa maelezo ya akaunti yako</li>
-          <li>• Subiri msaada wa haraka</li>
+          <li>• {t('dashboard.callOrMessage')}</li>
+          <li>• {t('dashboard.explainProblem')}</li>
+          <li>• {t('dashboard.provideAccountInfo')}</li>
+          <li>• {t('dashboard.waitForHelp')}</li>
         </ul>
       </div>
 
       <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
         <h4 className="font-semibold text-green-900 mb-2 flex items-center">
           <CheckCircle className="h-4 w-4 mr-2" />
-          Tunasaidia Na:
+          {t('dashboard.weHelpWith')}
         </h4>
         <ul className="text-sm text-green-800 space-y-1">
-          <li>• Kuongeza na kusasisha nyumba</li>
-          <li>• Matatizo ya akaunti yako</li>
-          <li>• Maswali kuhusu bei na malipo</li>
-          <li>• Mafunzo ya kutumia mfumo</li>
-          <li>• Maoni na mapendekezo</li>
+          <li>• {t('dashboard.addUpdateProperties')}</li>
+          <li>• {t('dashboard.accountIssues')}</li>
+          <li>• {t('dashboard.pricingQuestions')}</li>
+          <li>• {t('dashboard.systemTraining')}</li>
+          <li>• {t('dashboard.feedbackSuggestions')}</li>
         </ul>
       </div>
     </div>
@@ -218,10 +221,10 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
               <HelpCircle className="h-6 w-6 text-white" />
             </div>
-            Msaada wa Wataalamu
+            {t('dashboard.expertHelp')}
           </DialogTitle>
           <p className="text-gray-600 mt-2">
-            Tuko hapa kukusaidia kila wakati. Wasiliana nasi kwa msaada wa haraka na wa ubora.
+            {t('dashboard.helpDescription')}
           </p>
         </DialogHeader>
       
@@ -239,13 +242,13 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
         <div className="pt-6 border-t">
           <div className="text-center">
             <p className="text-sm text-gray-600 mb-2">
-              Nambari ya Msaada:
+              {t('dashboard.supportNumber')}
             </p>
             <p className="text-lg font-bold text-primary">
               {SUPPORT_PHONE}
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Inapatikana {SUPPORT_HOURS} - Huduma ya Kiswahili na Kiingereza
+              {t('dashboard.availableLanguages')}
             </p>
           </div>
         </div>
@@ -253,8 +256,7 @@ const GetHelpSection: React.FC<GetHelpSectionProps> = ({
         {/* Encouragement Message */}
         <div className="bg-gradient-to-r from-primary/10 to-blue-50 rounded-lg p-4 text-center">
           <p className="text-sm text-gray-700 font-medium">
-            💡 <strong>Usisahau:</strong> Hakuna swali dogo sana! 
-            Tuko hapa kukusaidia kufanikiwa kwenye biashara yako ya nyumba.
+            {t('dashboard.noQuestionTooSmall')} <strong>{t('dashboard.encouragementMessage')}</strong>
           </p>
         </div>
       </div>

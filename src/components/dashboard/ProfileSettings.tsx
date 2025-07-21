@@ -23,6 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User, Save, RefreshCw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Profile = Tables<'profiles'>;
@@ -66,29 +67,31 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   onSubmit,
   onInputChange
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
-            Sasisha Maelezo ya Akaunti
+            {t('dashboard.updateAccountDetails')}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="full_name">Jina Kamili</Label>
+            <Label htmlFor="full_name">{t('dashboard.fullName')}</Label>
             <Input
               id="full_name"
               value={profileForm.full_name}
               onChange={(e) => onInputChange('full_name', e.target.value)}
-              placeholder="Weka jina lako kamili"
+              placeholder={t('dashboard.enterFullName')}
               required
             />
           </div>
           
           <div>
-            <Label htmlFor="phone">Nambari ya Simu</Label>
+            <Label htmlFor="phone">{t('dashboard.phoneNumber')}</Label>
             <Input
               id="phone"
               type="tel"
@@ -100,14 +103,14 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
           </div>
 
           <div>
-            <Label htmlFor="user_type">Aina ya Mtumiaji</Label>
+            <Label htmlFor="user_type">{t('dashboard.userType')}</Label>
             <Input
-              value="Mwenye Nyumba/Mpangisha"
+              value={t('dashboard.landlordAgent')}
               disabled
               className="bg-gray-50 text-gray-600"
             />
             <p className="text-xs text-gray-500 mt-1">
-              Aina ya akaunti haiwezi kubadilishwa
+              {t('dashboard.accountTypeCannotChange')}
             </p>
           </div>
 
@@ -118,7 +121,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
               onClick={onClose}
               disabled={profileLoading}
             >
-              Sitisha
+              {t('dashboard.cancel')}
             </Button>
             <Button 
               type="submit" 
@@ -128,12 +131,12 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
               {profileLoading ? (
                 <>
                   <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  Inahifadhi...
+                  {t('dashboard.saving')}
                 </>
               ) : (
                 <>
                   <Save className="h-4 w-4 mr-2" />
-                  Hifadhi
+                  {t('dashboard.save')}
                 </>
               )}
             </Button>

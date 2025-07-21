@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Home, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Property = Tables<'properties'>;
@@ -63,6 +64,8 @@ const PropertyManagement: React.FC<PropertyManagementProps> = ({
   onDeleteProperty,
   onAddProperty
 }) => {
+  const { t } = useTranslation();
+
   /**
    * PROPERTY FILTERING LOGIC
    * =======================
@@ -88,7 +91,7 @@ const PropertyManagement: React.FC<PropertyManagementProps> = ({
     <div className="flex flex-col sm:flex-row gap-3">
       <div className="relative">
         <Input
-          placeholder="Tafuta nyumba..."
+          placeholder={t('dashboard.searchProperties')}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           className="pl-10 w-full sm:w-64"
@@ -97,12 +100,12 @@ const PropertyManagement: React.FC<PropertyManagementProps> = ({
       
       <Select value={filterStatus} onValueChange={onFilterChange}>
         <SelectTrigger className="w-full sm:w-40">
-          <SelectValue placeholder="Hali" />
+          <SelectValue placeholder={t('dashboard.status')} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Zote</SelectItem>
-          <SelectItem value="active">Zinazoonekana</SelectItem>
-          <SelectItem value="inactive">Zimesitishwa</SelectItem>
+          <SelectItem value="all">{t('dashboard.all')}</SelectItem>
+          <SelectItem value="active">{t('dashboard.active')}</SelectItem>
+          <SelectItem value="inactive">{t('dashboard.inactive')}</SelectItem>
         </SelectContent>
       </Select>
 
@@ -133,10 +136,10 @@ const PropertyManagement: React.FC<PropertyManagementProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <CardTitle className="text-2xl font-bold text-gray-900">
-              Nyumba Zako ({filteredProperties.length})
+              {t('dashboard.yourProperties', { count: filteredProperties.length })}
             </CardTitle>
             <p className="text-gray-600 mt-1">
-              Simamia na usasisha nyumba zako zote
+              {t('dashboard.manageProperties')}
             </p>
           </div>
           
