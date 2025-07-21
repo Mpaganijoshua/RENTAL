@@ -40,6 +40,7 @@ import { Search, MapPin, SlidersHorizontal, X, Grid3X3, List } from 'lucide-reac
 import { useSearchParams } from 'react-router-dom';
 import { useProperties } from '@/hooks/useProperties';
 import type { Property } from '@/hooks/useProperties';
+import { useTranslation } from 'react-i18next';
 
 /**
  * FILTER STATE INTERFACE
@@ -248,6 +249,7 @@ const FilterUtils = {
 const Browse = () => {
   // URL parameter handling for search state persistence
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
   
   // State management - separated into logical groups
   const [filters, setFilters] = useState<FilterState>(() => getInitialFilterState(searchParams));
@@ -338,13 +340,13 @@ const Browse = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Kuna hitilafu katika kupakia nyumba
+              {t('browse.errorLoading')}
             </h2>
             <p className="text-gray-600 mb-8">
-              Tafadhali jaribu tena baadaye.
+              {t('browse.tryAgainLater')}
             </p>
             <Button onClick={() => window.location.reload()}>
-              Jaribu Tena
+              {t('browse.tryAgain')}
             </Button>
           </div>
         </div>
@@ -368,10 +370,10 @@ const Browse = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Pata Nyumba Yako ya Kupenda
+              {t('browse.title')}
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              Nyumba {sortedProperties.length} zinapatikana kwa ajili yako
+              {t('browse.propertiesAvailable', { count: sortedProperties.length })}
             </p>
           </div>
 
@@ -384,7 +386,7 @@ const Browse = () => {
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input
-                      placeholder="Mji au eneo la kupenda..."
+                      placeholder={t('browse.cityPlaceholder')}
                       value={filters.searchQuery}
                       onChange={(e) => updateFilter('searchQuery', e.target.value)}
                       className="pl-12 h-14 text-lg border-0 focus-visible:ring-2 focus-visible:ring-primary"
@@ -396,15 +398,15 @@ const Browse = () => {
                 <div className="flex gap-4">
                   <Select value={filters.priceRange} onValueChange={(value) => updateFilter('priceRange', value)}>
                     <SelectTrigger className="w-48 h-14 border-0">
-                      <SelectValue placeholder="Bei (TZS)" />
+                      <SelectValue placeholder={t('browse.priceLabel')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">Bei yoyote</SelectItem>
-                      <SelectItem value="0-100000">Chini ya 100K</SelectItem>
-                      <SelectItem value="100000-500000">100K - 500K</SelectItem>
-                      <SelectItem value="500000-1000000">500K - 1M</SelectItem>
-                      <SelectItem value="1000000-2000000">1M - 2M</SelectItem>
-                      <SelectItem value="2000000+">Zaidi ya 2M</SelectItem>
+                      <SelectItem value="all">{t('browse.anyPrice')}</SelectItem>
+                      <SelectItem value="0-100000">{t('browse.under100k')}</SelectItem>
+                      <SelectItem value="100000-500000">{t('browse.100kTo500k')}</SelectItem>
+                      <SelectItem value="500000-1000000">{t('browse.500kTo1m')}</SelectItem>
+                      <SelectItem value="1000000-2000000">{t('browse.1mTo2m')}</SelectItem>
+                      <SelectItem value="2000000+">{t('browse.over2m')}</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -415,13 +417,13 @@ const Browse = () => {
                     className="h-14 px-6 border-2"
                   >
                     <SlidersHorizontal className="h-5 w-5 mr-2" />
-                    Filters
+                    {t('browse.filters')}
                   </Button>
 
                   {/* Search Button */}
                   <Button className="h-14 px-8 bg-primary hover:bg-primary/90">
                     <Search className="h-5 w-5 mr-2" />
-                    Tafuta
+                    {t('browse.search')}
                   </Button>
                 </div>
               </div>
@@ -432,11 +434,11 @@ const Browse = () => {
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {/* Custom Price Range */}
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Bei ya Maalum</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">{t('browse.customPrice')}</h4>
                       <div className="space-y-3">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Bei ya chini (TZS)
+                            {t('browse.minPriceLabel')}
                           </label>
                           <Input
                             type="number"
@@ -448,7 +450,7 @@ const Browse = () => {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Bei ya juu (TZS)
+                            {t('browse.maxPriceLabel')}
                           </label>
                           <Input
                             type="number"
@@ -463,11 +465,11 @@ const Browse = () => {
 
                     {/* Utilities Filter */}
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Huduma za Msingi</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">{t('browse.basicUtilities')}</h4>
                       <div className="space-y-3">
                         {[
-                          { key: 'electricity', label: 'Umeme' },
-                          { key: 'water', label: 'Maji' }
+                          { key: 'electricity', label: t('browse.electricity') },
+                          { key: 'water', label: t('browse.water') }
                         ].map(({ key, label }) => (
                           <label key={key} className="flex items-center">
                             <input
@@ -484,12 +486,12 @@ const Browse = () => {
 
                     {/* Nearby Services Filter */}
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Huduma za Karibu</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">{t('browse.nearbyServices')}</h4>
                       <div className="space-y-3">
                         {[
-                          { key: 'school', label: 'Shule' },
-                          { key: 'hospital', label: 'Hospitali' },
-                          { key: 'market', label: 'Soko' }
+                          { key: 'school', label: t('browse.school') },
+                          { key: 'hospital', label: t('browse.hospital') },
+                          { key: 'market', label: t('browse.market') }
                         ].map(({ key, label }) => (
                           <label key={key} className="flex items-center">
                             <input
@@ -506,15 +508,15 @@ const Browse = () => {
 
                     {/* Sort Options */}
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Panga Kwa</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">{t('browse.sortBy')}</h4>
                       <Select value={filters.sortBy} onValueChange={(value) => updateFilter('sortBy', value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="newest">Mpya zaidi</SelectItem>
-                          <SelectItem value="price-low">Bei ya chini</SelectItem>
-                          <SelectItem value="price-high">Bei ya juu</SelectItem>
+                          <SelectItem value="newest">{t('browse.newest')}</SelectItem>
+                          <SelectItem value="price-low">{t('browse.priceLow')}</SelectItem>
+                          <SelectItem value="price-high">{t('browse.priceHigh')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -524,7 +526,7 @@ const Browse = () => {
                   <div className="flex justify-between items-center mt-6">
                     <Button variant="ghost" onClick={handleClearAllFilters} className="text-gray-600">
                       <X className="h-4 w-4 mr-2" />
-                      Futa Filters Zote
+                      {t('browse.clearFilters')}
                     </Button>
                   </div>
                 </div>
@@ -540,10 +542,10 @@ const Browse = () => {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-2xl font-semibold text-gray-900">
-              {sortedProperties.length} nyumba zinapatikana
+              {t('browse.propertiesFound', { count: sortedProperties.length })}
             </h2>
             {filters.searchQuery && (
-              <p className="text-gray-600 mt-1">katika "{filters.searchQuery}"</p>
+              <p className="text-gray-600 mt-1">{t('browse.inLocation', { location: filters.searchQuery })}</p>
             )}
           </div>
 
@@ -630,6 +632,7 @@ const Browse = () => {
               {filters.utilities.map(utility => (
                 <Badge key={utility} variant="secondary" className="px-3 py-1">
                   {utility === 'electricity' ? 'Umeme' : 'Maji'}
+                  {utility === 'electricity' ? t('browse.electricity') : t('browse.water')}
                   <button
                     onClick={() => handleUtilityToggle(utility)}
                     className="ml-2 hover:text-red-500"
@@ -642,7 +645,7 @@ const Browse = () => {
               {/* Nearby Service Badges */}
               {filters.nearbyServices.map(service => (
                 <Badge key={service} variant="secondary" className="px-3 py-1">
-                  {service === 'school' ? 'Shule' : service === 'hospital' ? 'Hospitali' : 'Soko'}
+                  {service === 'school' ? t('browse.school') : service === 'hospital' ? t('browse.hospital') : t('browse.market')}
                   <button
                     onClick={() => handleNearbyServiceToggle(service)}
                     className="ml-2 hover:text-red-500"
@@ -659,7 +662,7 @@ const Browse = () => {
         {isLoading && (
           <div className="py-16">
             <LoadingSpinner size="lg" className="mb-4" />
-            <p className="text-center text-gray-600">Inapakia nyumba...</p>
+            <p className="text-center text-gray-600">{t('browse.loadingProperties')}</p>
           </div>
         )}
 
@@ -667,7 +670,7 @@ const Browse = () => {
         {!isLoading && sortedProperties.length > 0 ? (
           <div className={`grid gap-6 ${
             uiState.viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
               : 'grid-cols-1'
           }`}>
             {sortedProperties.map((property) => (
