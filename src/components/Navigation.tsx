@@ -36,6 +36,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Home, Search, User, Menu, X, Globe, Building2, LogOut } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Global Navigation Component
@@ -51,47 +52,9 @@ const Navigation = () => {
   // Component state management
   // Usimamizi wa hali ya kipengee
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu visibility
-  const [language, setLanguage] = useState('sw'); // Current language (Swahili default)
   const location = useLocation(); // Current page location for active states
   const { user, signOut } = useAuth(); // Authentication state
-
-  /**
-   * Translation Configuration / Mipangilio ya Tafsiri
-   * 
-   * Supports English and Swahili languages for all navigation elements.
-   * This makes the platform accessible to both local and international users.
-   * 
-   * Inasaidia lugha za Kiingereza na Kiswahili kwa vipengele vyote vya uongozaji.
-   * Hii inafanya jukwaa lifikike kwa watumiaji wa ndani na kimataifa.
-   */
-  const translations = {
-    en: {
-      home: 'Home',
-      browse: 'Browse Properties',
-      about: 'About Us',
-      dashboard: 'Host Dashboard',
-      signIn: 'Sign In',
-      signUp: 'Sign Up',
-      signOut: 'Sign Out',
-      language: 'Language',
-      becomeHost: 'Become a Host'
-    },
-    sw: {
-      home: 'Nyumbani',
-      browse: 'Tazama Nyumba',
-      about: 'Kuhusu',
-      dashboard: 'Dashibodi ya Mwenye Nyumba',
-      signIn: 'Ingia',
-      signUp: 'Jisajili',
-      signOut: 'Toka',
-      language: 'Lugha',
-      becomeHost: 'Kuwa Mwenye Nyumba'
-    }
-  };
-
-  // Get current language translations
-  // Pata tafsiri za lugha ya sasa
-  const t = translations[language as keyof typeof translations];
+  const { t, i18n } = useTranslation();
 
   /**
    * Language Toggle Function
@@ -101,7 +64,8 @@ const Navigation = () => {
    * Inabadilisha kati ya lugha za Kiingereza na Kiswahili
    */
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'sw' : 'en');
+    const newLanguage = i18n.language === 'en' ? 'sw' : 'en';
+    i18n.changeLanguage(newLanguage);
   };
 
   return (
@@ -130,7 +94,7 @@ const Navigation = () => {
                   location.pathname === '/browse' ? 'bg-gray-100 font-semibold' : ''
                 }`}
               >
-                {t.browse}
+                {t('navigation.browse')}
               </Button>
             </Link>
             
@@ -142,7 +106,7 @@ const Navigation = () => {
                   location.pathname === '/about' ? 'bg-gray-100 font-semibold' : ''
                 }`}
               >
-                {t.about}
+                {t('navigation.about')}
               </Button>
             </Link>
             
@@ -154,7 +118,7 @@ const Navigation = () => {
                   location.pathname === '/dashboard' ? 'bg-gray-100 font-semibold' : ''
                 }`}
               >
-                {t.becomeHost}
+                {t('navigation.becomeHost')}
               </Button>
             </Link>
           </div>
@@ -169,7 +133,7 @@ const Navigation = () => {
               className="flex items-center space-x-2 px-3 py-2 rounded-full hover:bg-gray-100"
             >
               <Globe className="h-4 w-4" />
-              <span className="text-sm font-medium">{language.toUpperCase()}</span>
+              <span className="text-sm font-medium">{i18n.language.toUpperCase()}</span>
             </Button>
 
             {/* User Account Menu - Menyu ya akaunti ya mtumiaji */}
@@ -181,7 +145,7 @@ const Navigation = () => {
                     className="flex items-center space-x-2 px-3 py-2 rounded-full hover:bg-gray-100"
                   >
                     <User className="h-4 w-4" />
-                    <span>{t.dashboard}</span>
+                    <span>{t('navigation.dashboard')}</span>
                   </Button>
                 </Link>
                 <Button
@@ -190,19 +154,19 @@ const Navigation = () => {
                   className="flex items-center space-x-2 px-3 py-2 rounded-full hover:bg-gray-100"
                 >
                   <LogOut className="h-4 w-4" />
-                  <span>{t.signOut}</span>
+                  <span>{t('navigation.signOut')}</span>
                 </Button>
               </div>
             ) : (
               <div className="flex items-center space-x-2">
                 <Link to="/signin">
                   <Button variant="ghost" size="sm">
-                    {t.signIn}
+                    {t('navigation.signIn')}
                   </Button>
                 </Link>
                 <Link to="/signup">
                   <Button size="sm" className="bg-primary hover:bg-primary/90">
-                    {t.signUp}
+                    {t('navigation.signUp')}
                   </Button>
                 </Link>
               </div>
@@ -234,7 +198,7 @@ const Navigation = () => {
               >
                 <div className="flex items-center">
                   <Search className="h-5 w-5 mr-3 text-gray-400" />
-                  {t.browse}
+                  {t('navigation.browse')}
                 </div>
               </Link>
               
@@ -246,7 +210,7 @@ const Navigation = () => {
               >
                 <div className="flex items-center">
                   <User className="h-5 w-5 mr-3 text-gray-400" />
-                  {t.about}
+                  {t('navigation.about')}
                 </div>
               </Link>
               
@@ -259,7 +223,7 @@ const Navigation = () => {
                 >
                   <div className="flex items-center">
                     <User className="h-5 w-5 mr-3 text-gray-400" />
-                    {t.dashboard}
+                    {t('navigation.dashboard')}
                   </div>
                 </Link>
               )}
@@ -271,7 +235,7 @@ const Navigation = () => {
               >
                 <div className="flex items-center">
                   <Building2 className="h-5 w-5 mr-3 text-gray-400" />
-                  {t.becomeHost}
+                  {t('navigation.becomeHost')}
                 </div>
               </Link>
 
@@ -284,7 +248,7 @@ const Navigation = () => {
                   className="w-full justify-start px-4 py-3 hover:bg-gray-100 rounded-lg"
                 >
                   <Globe className="h-5 w-5 mr-3 text-gray-400" />
-                  {t.language} ({language.toUpperCase()})
+                  {t('navigation.language')} ({i18n.language.toUpperCase()})
                 </Button>
                 
                 {user ? (
@@ -294,7 +258,7 @@ const Navigation = () => {
                     className="w-full justify-start px-4 py-3 hover:bg-gray-100 rounded-lg mt-2"
                   >
                     <LogOut className="h-5 w-5 mr-3 text-gray-400" />
-                    {t.signOut}
+                    {t('navigation.signOut')}
                   </Button>
                 ) : (
                   <>
@@ -302,14 +266,14 @@ const Navigation = () => {
                     <Link to="/signin" className="block mt-2">
                       <Button variant="ghost" className="w-full justify-start px-4 py-3 hover:bg-gray-100 rounded-lg">
                         <User className="h-5 w-5 mr-3 text-gray-400" />
-                        {t.signIn}
+                        {t('navigation.signIn')}
                       </Button>
                     </Link>
                     
                     {/* Mobile Sign Up Button - Kitufe cha kujisajili kwa simu */}
                     <Link to="/signup" className="block mt-2">
                       <Button className="w-full mt-2 bg-primary hover:bg-primary/90">
-                        {t.signUp}
+                        {t('navigation.signUp')}
                       </Button>
                     </Link>
                   </>

@@ -5,8 +5,10 @@ import { Star, MapPin, Wifi, Car, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProperties } from '@/hooks/useProperties';
 import LoadingSpinner from '@/components/ui/loading-spinner';
+import { useTranslation } from 'react-i18next';
 
 const FeaturedProperties = () => {
+  const { t } = useTranslation();
   const { data: allProperties = [], isLoading, error } = useProperties();
   
   // Get featured properties (limit to 4 for homepage display)
@@ -27,10 +29,10 @@ const FeaturedProperties = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Nyumba  Maarufu
+              {t('featuredProperties.title')}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Nyumba zilizochaguliwa kwa ubora na huduma bora
+              {t('featuredProperties.subtitle')}
             </p>
           </div>
           <div className="flex justify-center py-8">
@@ -47,10 +49,10 @@ const FeaturedProperties = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Kuna hitilafu katika kupakia nyumba
+              {t('featuredProperties.loadingError')}
             </h2>
             <p className="text-gray-600">
-              Tafadhali jaribu tena baadaye.
+              {t('featuredProperties.tryAgain')}
             </p>
           </div>
         </div>
@@ -63,10 +65,10 @@ const FeaturedProperties = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Nyumba  Maarufu
+            {t('featuredProperties.title')}
           </h2>
           <p className="text-xl text-muted-foreground">
-            Nyumba zilizochaguliwa kwa ubora na huduma bora
+            {t('featuredProperties.subtitle')}
           </p>
         </div>
 
@@ -89,7 +91,7 @@ const FeaturedProperties = () => {
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">
-                      Maarufu
+                      {t('featuredProperties.featured')}
                     </Badge>
                     <div className="absolute top-3 right-3 bg-background/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center">
                       <Star className="h-3 w-3 text-yellow-500 fill-current mr-1" />
@@ -134,9 +136,9 @@ const FeaturedProperties = () => {
                         <span className="text-lg font-bold text-foreground">
                           TSh {Number(property.price).toLocaleString()}
                         </span>
-                        <span className="text-muted-foreground text-sm">/mwezi</span>
+                        <span className="text-muted-foreground text-sm">{t('featuredProperties.perMonth')}</span>
                         <div className="text-xs text-muted-foreground mt-1">
-                          {Math.floor(Math.random() * 50) + 10} maoni
+                          {Math.floor(Math.random() * 50) + 10} {t('featuredProperties.reviews')}
                         </div>
                       </div>
                       
@@ -149,7 +151,7 @@ const FeaturedProperties = () => {
                           className="flex items-center bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-full text-xs transition-colors"
                         >
                           <span className="mr-1">📱</span>
-                          Piga
+                          {t('featuredProperties.call')}
                         </a>
                       )}
                     </div>
@@ -161,7 +163,7 @@ const FeaturedProperties = () => {
         ) : (
           <div className="text-center py-8">
             <p className="text-muted-foreground">
-              Hakuna nyumba za kuonyesha kwa sasa
+              {t('featuredProperties.noProperties')}
             </p>
           </div>
         )}
@@ -169,7 +171,7 @@ const FeaturedProperties = () => {
         <div className="text-center mt-10">
           <Link to="/browse">
             <button className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors">
-              Ona Nyumba Zaidi
+              {t('featuredProperties.viewMore')}
             </button>
           </Link>
         </div>

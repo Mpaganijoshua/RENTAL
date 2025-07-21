@@ -3,50 +3,40 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Search, Shield, Heart, MapPin, Zap, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
   const features = [
     {
       icon: Search,
-      title: 'Tafuta Kwa Urahisi',
-      titleEn: 'Easy Search',
-      description: 'Tumia filters za kisasa kupata nyumba inayokufaa. Chuja kwa bei, mahali, na huduma zinazopatikana.',
-      descriptionEn: 'Use modern filters to find your perfect home. Filter by price, location, and available amenities.'
+      titleKey: 'features.easySearch.title',
+      descriptionKey: 'features.easySearch.description'
     },
     {
       icon: Shield,
-      title: 'Usalama wa Juu',
-      titleEn: 'High Security',
-      description: 'Mamiliki wote wamehakikiwa na maelezo yao ni ya kweli. Hakuna wasiwasi wa ufujo au udanganyifu.',
-      descriptionEn: 'All landlords are verified and their information is authentic. No worries about fraud or deception.'
+      titleKey: 'features.highSecurity.title',
+      descriptionKey: 'features.highSecurity.description'
     },
     {
       icon: Heart,
-      title: 'Hifadhi Pendwa',
-      titleEn: 'Save Favorites',
-      description: 'Hifadhi nyumba unazozipenda na uziangalie baadaye. Linganisha bei na mazingira kwa urahisi.',
-      descriptionEn: 'Save the houses you love and review them later. Compare prices and environments easily.'
+      titleKey: 'features.saveFavorites.title',
+      descriptionKey: 'features.saveFavorites.description'
     },
     {
       icon: MapPin,
-      title: 'Ramani za Kisasa',
-      titleEn: 'Modern Maps',
-      description: 'Ona mahali halisi pa nyumba na umbali wa huduma kama shule, hospitali, na maduka.',
-      descriptionEn: 'See the exact location of houses and distance to services like schools, hospitals, and shops.'
+      titleKey: 'features.modernMaps.title',
+      descriptionKey: 'features.modernMaps.description'
     },
     {
       icon: Zap,
-      title: 'Huduma za Msingi',
-      titleEn: 'Basic Utilities',
-      description: 'Jua kama nyumba ina umeme, maji, na huduma nyingine muhimu kabla ya kuhamia.',
-      descriptionEn: 'Know if the house has electricity, water, and other essential services before moving.'
+      titleKey: 'features.basicUtilities.title',
+      descriptionKey: 'features.basicUtilities.description'
     },
     {
       icon: Users,
-      title: 'Jamii Kubwa',
-      titleEn: 'Large Community',
-      description: 'Jiunge na jamii ya Watanzania wanaotafuta na kutoa nyumba. Ushauri na maoni ya kweli.',
-      descriptionEn: 'Join a community of Tanzanians looking for and offering houses. Real advice and opinions.'
+      titleKey: 'features.largeCommunity.title',
+      descriptionKey: 'features.largeCommunity.description'
     }
   ];
 
@@ -56,11 +46,10 @@ const FeaturesSection = () => {
         {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Kwa Nini Uchague Nyumba Link?
+            {t('features.whyChoose')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Tunatoa huduma bora za kutafuta na kutoa nyumba kote Tanzania. 
-            Jisajili leo na uanze safari yako ya kupata nyumba ya ndoto.
+            {t('features.subtitle')}
           </p>
         </div>
 
@@ -80,12 +69,12 @@ const FeaturesSection = () => {
                   
                   {/* Title */}
                   <h3 className="text-xl font-semibold text-gray-900">
-                    {feature.title}
+                    {t(feature.titleKey)}
                   </h3>
                   
                   {/* Description */}
                   <p className="text-gray-600 leading-relaxed">
-                    {feature.description}
+                    {t(feature.descriptionKey)}
                   </p>
                 </div>
               </CardContent>
@@ -97,23 +86,23 @@ const FeaturesSection = () => {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-primary to-serengeti-500 rounded-2xl p-8 text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Tayari Kuanza? Jisajili Sasa!
+              {t('features.readyToStart')}
             </h3>
             <p className="text-lg mb-6 opacity-90">
-              Jiunge na elfu za Watanzania wanaotumia Nyumba Link kupata nyumba zao za ndoto.
+              {t('features.joinThousands')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/signup?type=landlord"
                 className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block text-center"
               >
-                Jisajili Kama Mwenye Nyumba
+                {t('features.registerAsLandlord')}
               </Link>
               <Link 
                 to="/browse" 
                 className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-colors inline-block text-center"
               >
-                Tafuta Nyumba
+                {t('features.searchHouses')}
               </Link>
             </div>
           </div>

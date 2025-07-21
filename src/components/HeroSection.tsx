@@ -37,6 +37,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Search, MapPin, Calendar, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroBackground from '@/assets/hero-background.jpg';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Hero Section Component
@@ -51,6 +52,7 @@ import heroBackground from '@/assets/hero-background.jpg';
 const HeroSection = () => {
   // Search form state management
   // Usimamizi wa hali ya fomu ya utafutaji
+  const { t } = useTranslation();
   const [searchLocation, setSearchLocation] = useState(''); // Location search input
   const [minPrice, setMinPrice] = useState('');           // Minimum price filter
   const [maxPrice, setMaxPrice] = useState('');           // Maximum price filter
@@ -71,13 +73,13 @@ const HeroSection = () => {
         <div className="text-center mb-12">
           {/* Primary headline - Kichwa kikuu */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Pata Nyumba
-            <span className="block text-primary">Yako Haraka</span>
+            {t('homepage.heroTitle')}
+            <span className="block text-primary">{t('homepage.heroTitleHighlight')}</span>
           </h1>
           
           {/* Supporting message - Ujumbe wa kusaidia */}
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Jukwaa la kwanza la kutafuta na kupata nyumba za kukodi Tanzania
+            {t('homepage.heroSubtitle')}
           </p>
         </div>
 
@@ -90,12 +92,12 @@ const HeroSection = () => {
                 {/* Location Search Input - Ingizo la utafutaji wa eneo */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
-                    Tafuta eneo
+                    {t('homepage.searchLocation')}
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
-                      placeholder="Ingiza eneo (mfano: Kinondoni, Temeke)"
+                      placeholder={t('homepage.locationPlaceholder')}
                       value={searchLocation}
                       onChange={(e) => setSearchLocation(e.target.value)}
                       className="pl-12 h-14 text-lg border-2 border-border focus:border-primary"
@@ -108,7 +110,7 @@ const HeroSection = () => {
                   {/* Minimum Price - Bei ya chini */}
                   <div>
                     <label className="block text-sm font-semibold text-foreground mb-2">
-                      Bei ya chini
+                      {t('homepage.minPrice')}
                     </label>
                     <Input
                       type="number"
@@ -121,7 +123,7 @@ const HeroSection = () => {
                   {/* Maximum Price - Bei ya juu */}
                   <div>
                     <label className="block text-sm font-semibold text-foreground mb-2">
-                      Bei ya juu
+                      {t('homepage.maxPrice')}
                     </label>
                     <Input
                       type="number"
@@ -141,7 +143,7 @@ const HeroSection = () => {
                   >
                     <Button size="lg" className="w-full h-14 text-lg bg-primary hover:bg-primary/90 shadow-lg">
                       <Search className="h-6 w-6 mr-3" />
-                      Tafuta Nyumba
+                      {t('homepage.searchButton')}
                     </Button>
                   </Link>
                 </div>
@@ -155,25 +157,25 @@ const HeroSection = () => {
           {/* Available Properties - Nyumba zinazopatikana */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
             <div className="text-4xl font-bold text-white mb-2">500+</div>
-            <div className="text-white/80">Nyumba zinazopatikana</div>
+            <div className="text-white/80">{t('homepage.availableProperties')}</div>
           </div>
           
           {/* Major Cities Coverage - Miji mikuu */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
             <div className="text-4xl font-bold text-white mb-2">50+</div>
-            <div className="text-white/80">Miji mikuu</div>
+            <div className="text-white/80">{t('homepage.majorCities')}</div>
           </div>
           
           {/* Happy Customers - Wateja wenye furaha */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
             <div className="text-4xl font-bold text-white mb-2">1000+</div>
-            <div className="text-white/80">Wateja wenye furaha</div>
+            <div className="text-white/80">{t('homepage.happyCustomers')}</div>
           </div>
           
           {/* Customer Support - Msaada wa wateja */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
             <div className="text-4xl font-bold text-white mb-2">24/7</div>
-            <div className="text-white/80">Msaada wa haraka</div>
+            <div className="text-white/80">{t('homepage.quickSupport')}</div>
           </div>
         </div>
       </div>

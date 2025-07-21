@@ -2,44 +2,46 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PopularDestinations = () => {
+  const { t } = useTranslation();
   const destinations = [
     {
       name: 'Dar es Salaam',
-      properties: '120+ nyumba',
+      properties: '120+',
       image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 30,000'
+      price: 'TSh 30,000'
     },
     {
       name: 'Arusha',
-      properties: '85+ nyumba',
+      properties: '85+',
       image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 40,000'
+      price: 'TSh 40,000'
     },
     {
       name: 'Mwanza',
-      properties: '60+ nyumba',
+      properties: '60+',
       image: 'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 50,000'
+      price: 'TSh 50,000'
     },
     {
       name: 'Dodoma',
-      properties: '45+ nyumba',
+      properties: '45+',
       image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 100,000'
+      price: 'TSh 100,000'
     },
     {
       name: 'Zanzibar',
-      properties: '30+ nyumba',
+      properties: '30+',
       image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 200,000'
+      price: 'TSh 200,000'
     },
     {
       name: 'Mbeya',
-      properties: '25+ nyumba',
+      properties: '25+',
       image: 'https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=400&h=300&fit=crop',
-      price: 'Kuanzia TSh 20,000'
+      price: 'TSh 20,000'
     }
   ];
 
@@ -48,10 +50,10 @@ const PopularDestinations = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Miji Maarufu
+            {t('popularDestinations.title')}
           </h2>
           <p className="text-xl text-muted-foreground">
-            Gundua maeneo bora ya kuishi Tanzania
+            {t('popularDestinations.subtitle')}
           </p>
         </div>
 
@@ -72,14 +74,14 @@ const PopularDestinations = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">
                     <h3 className="text-xl font-bold mb-1">{destination.name}</h3>
-                    <p className="text-sm opacity-90">{destination.properties}</p>
+                    <p className="text-sm opacity-90">{destination.properties} {t('popularDestinations.properties')}</p>
                   </div>
                 </div>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-muted-foreground">
                       <MapPin className="h-4 w-4 mr-1" />
-                      <span className="text-sm">{destination.price}</span>
+                      <span className="text-sm">{t('popularDestinations.startingFrom')} {destination.price}</span>
                     </div>
                   </div>
                 </CardContent>
