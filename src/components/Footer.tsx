@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Heart, Home, Shield, Users, Award } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -22,13 +24,12 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
-              Jukwaa la kisasa la kutafuta na kukodia nyumba nchini Tanzania. 
-              Tunawachanganya wenye nyumba na wapangaji kwa urahisi na usalama.
+              {t('footer.description')}
             </p>
             <div className="space-y-2">
               <div className="flex items-center text-gray-300">
                 <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
-                <span>Dar es Salaam, Tanzania</span>
+                <span>{t('footer.location')}</span>
               </div>
               <div className="flex items-center text-gray-300">
                 <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
@@ -47,30 +48,30 @@ const Footer = () => {
 
           {/* Quick links */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Kurasa Muhimu</h4>
+            <h4 className="font-semibold text-lg mb-4 text-white">{t('footer.importantPages')}</h4>
             <ul className="space-y-3">
               <li>
                 <Link to="/" className="text-gray-300 hover:text-primary transition-colors flex items-center">
                   <Home className="h-4 w-4 mr-2" />
-                  Nyumbani
+                  {t('footer.home')}
                 </Link>
               </li>
               <li>
                 <Link to="/browse" className="text-gray-300 hover:text-primary transition-colors flex items-center">
                   <Users className="h-4 w-4 mr-2" />
-                  Tafuta Nyumba
+                  {t('footer.searchHouses')}
                 </Link>
               </li>
               <li>
                 <Link to="/signup?type=landlord" className="text-gray-300 hover:text-primary transition-colors flex items-center">
                   <Award className="h-4 w-4 mr-2" />
-                  Kuwa Mwenye Nyumba
+                  {t('footer.becomeLandlord')}
                 </Link>
               </li>
               <li>
                 <Link to="/dashboard" className="text-gray-300 hover:text-primary transition-colors flex items-center">
                   <Shield className="h-4 w-4 mr-2" />
-                  Dashboard
+                  {t('footer.dashboard')}
                 </Link>
               </li>
             </ul>
@@ -78,31 +79,31 @@ const Footer = () => {
 
           {/* Support & Legal */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Msaada na Sheria</h4>
+            <h4 className="font-semibold text-lg mb-4 text-white">{t('footer.supportLegal')}</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                  Maswali ya Kawaida
+                  {t('footer.faq')}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                  Wasiliana Nasi
+                  {t('footer.contactUs')}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                  Sera za Faragha
+                  {t('footer.privacyPolicy')}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                  Masharti ya Matumizi
+                  {t('footer.termsOfUse')}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                  Kanuni za Usalama
+                  {t('footer.safetyGuidelines')}
                 </a>
               </li>
             </ul>
@@ -110,27 +111,27 @@ const Footer = () => {
 
           {/* App Features */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Huduma Zetu</h4>
+            <h4 className="font-semibold text-lg mb-4 text-white">{t('footer.ourServices')}</h4>
             <ul className="space-y-3 text-gray-300">
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Utafutaji wa nyumba kwa urahisi</span>
+                <span>{t('footer.easySearch')}</span>
               </li>
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Mawasiliano ya moja kwa moja</span>
+                <span>{t('footer.directCommunication')}</span>
               </li>
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Usalama wa juu wa data</span>
+                <span>{t('footer.highSecurity')}</span>
               </li>
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Huduma ya wateja 24/7</span>
+                <span>{t('footer.customerService')}</span>
               </li>
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Vichujio vya kisasa</span>
+                <span>{t('footer.modernFilters')}</span>
               </li>
             </ul>
           </div>
@@ -141,19 +142,19 @@ const Footer = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
               <div className="text-2xl font-bold text-primary mb-1">1000+</div>
-              <div className="text-gray-400 text-sm">Nyumba Zilizosajiliwa</div>
+              <div className="text-gray-400 text-sm">{t('footer.registeredHouses')}</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-primary mb-1">500+</div>
-              <div className="text-gray-400 text-sm">Wenye Nyumba</div>
+              <div className="text-gray-400 text-sm">{t('footer.landlords')}</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-primary mb-1">50+</div>
-              <div className="text-gray-400 text-sm">Miji</div>
+              <div className="text-gray-400 text-sm">{t('footer.cities')}</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-primary mb-1">5000+</div>
-              <div className="text-gray-400 text-sm">Watumiaji</div>
+              <div className="text-gray-400 text-sm">{t('footer.users')}</div>
             </div>
           </div>
         </div>
@@ -162,13 +163,13 @@ const Footer = () => {
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-300 text-sm">
-              © {currentYear} Nyumba Link. Haki zote zimehifadhiwa.
+              © {currentYear} Nyumba Link. {t('footer.rightsReserved')}
             </div>
             
             {/* Creator Attribution */}
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
               <div className="flex items-center text-gray-300 text-sm">
-                <span>Imetengenezwa na</span>
+                <span>{t('footer.createdWith')}</span>
                 <Heart className="h-4 w-4 text-red-500 mx-2 fill-current" />
                 <span className="font-semibold text-primary">StarLabs AI</span>
               </div>
@@ -188,14 +189,14 @@ const Footer = () => {
           <div className="mt-4 pt-4 border-t border-gray-800">
             <div className="text-center">
               <p className="text-xs text-gray-400 mb-2">
-                Programu hii imetengenezwa kwa teknolojia za kisasa za AI na imeundwa kwa ajili ya jamii ya Tanzania
+                {t('footer.aiDescription')}
               </p>
               <div className="flex justify-center items-center space-x-4 text-xs text-gray-500">
-                <span>Powered by React & Supabase</span>
+                <span>{t('footer.poweredBy')}</span>
                 <span>•</span>
-                <span>Made with TypeScript</span>
+                <span>{t('footer.madeWith')}</span>
                 <span>•</span>
-                <span>Hosted on Lovable</span>
+                <span>{t('footer.hostedOn')}</span>
               </div>
             </div>
           </div>
