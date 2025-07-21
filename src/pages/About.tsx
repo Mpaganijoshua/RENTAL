@@ -55,6 +55,8 @@ import { useTranslation } from 'react-i18next';
  * ikijumuisha dhamira ya kampuni, timu, mafanikio, na maelezo ya mawasiliano.
  */
 const About = () => {
+  const { t } = useTranslation();
+
   /**
    * COMPANY STATISTICS
    * =================
