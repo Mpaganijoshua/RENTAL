@@ -41,6 +41,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, MapPin, Phone, Zap, Droplets, Bed } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 /**
  * PROPERTY CARD PROPS INTERFACE
@@ -122,6 +123,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   onToggleFavorite,
   viewMode = 'grid'
 }) => {
+  const { t } = useTranslation();
+
   /**
    * IMAGE CAROUSEL STATE
    * ===================
@@ -271,7 +274,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                     {bedrooms && bedrooms > 0 && (
                       <div className="flex items-center text-gray-600" title="Vyumba vya kulala">
                         <Bed className="h-4 w-4 mr-1" />
-                        <span className="text-sm">{bedrooms}</span>
+                        <span className="text-sm">{bedrooms} {t('propertyCard.bedrooms')}</span>
                       </div>
                     )}
                   </div>
@@ -292,7 +295,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                       className="flex items-center bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-full text-xs transition-colors"
                     >
                       <Phone className="h-3 w-3 mr-1" />
-                      Piga
+                      {t('propertyCard.call')}
                     </a>
                   )}
                 </div>
@@ -422,19 +425,19 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
               {electricity && (
                 <Badge variant="secondary" className="text-xs px-2 py-1 bg-green-100 text-green-800">
                   <Zap className="h-3 w-3 mr-1" />
-                  Umeme
+                  {t('browse.electricity')}
                 </Badge>
               )}
               {water && (
                 <Badge variant="secondary" className="text-xs px-2 py-1 bg-blue-100 text-blue-800">
                   <Droplets className="h-3 w-3 mr-1" />
-                  Maji
+                  {t('browse.water')}
                 </Badge>
               )}
               {bedrooms && bedrooms > 0 && (
                 <Badge variant="secondary" className="text-xs px-2 py-1">
                   <Bed className="h-3 w-3 mr-1" />
-                  {bedrooms} vyumba
+                  {bedrooms} {t('propertyCard.bedrooms')}
                 </Badge>
               )}
             </div>
@@ -451,7 +454,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                 <span className="text-lg font-bold text-gray-900">
                   TZS {price.toLocaleString()}
                 </span>
-                <span className="text-gray-500 ml-1 text-sm">/mwezi</span>
+                <span className="text-gray-500 ml-1 text-sm">{t('propertyCard.perMonth')}</span>
               </div>
               
               {/* 
@@ -463,14 +466,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                */}
               {(contactWhatsappPhone || contactPhone) && (
                 <a
-                  href={`https://wa.me/${(contactWhatsappPhone || contactPhone || '').replace(/[^0-9]/g, '')}?text=Hujambo,%20ninapenda%20kujua%20zaidi%20kuhusu%20nyumba%20hii:%20${encodeURIComponent(title)}`}
+                  href={`https://wa.me/${(contactWhatsappPhone || contactPhone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(t('propertyCard.whatsappMessage', { title }))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   className="flex items-center bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-full text-xs transition-colors"
                 >
                   <Phone className="h-3 w-3 mr-1" />
-                  Piga
+                  {t('propertyCard.call')}
                 </a>
               )}
             </div>
