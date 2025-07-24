@@ -49,6 +49,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { useProperties } from '@/hooks/useProperties';
+import { useTranslation } from 'react-i18next';
 
 /**
  * PROPERTY DETAIL COMPONENT
@@ -64,6 +65,7 @@ const PropertyDetail = () => {
   // URL parameter extraction - Kupata vigezo kutoka URL
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   // UI state management - Usimamizi wa hali ya UI
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
