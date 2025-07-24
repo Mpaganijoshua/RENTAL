@@ -705,6 +705,13 @@ const About = () => {
           <div className="absolute top-16 sm:top-32 right-10 sm:right-20 animate-bounce delay-1000">
             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
               <Home className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
+            </div>
+          </div>
+          
+          {/* Particle System */}
+          <div className="absolute inset-0">
+            {[...Array(20)].map((_, i) => (
+              <div
                 key={i}
                 className="absolute w-2 h-2 bg-white/20 rounded-full animate-ping"
                 style={{
@@ -789,9 +796,9 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-16 sm:bottom-32 left-10 sm:left-20 animate-bounce delay-2000">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
-              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-serengeti-500" />
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
