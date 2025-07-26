@@ -22,7 +22,7 @@ const PopularDestinations = () => {
     {
       name: 'Mwanza',
       properties: '60+',
-      image: 'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=300&fit=crop',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8c2QGIB2-x-nz5L3pu4Z60h9u5qpEI6z8KA&s',
       price: 'TSh 50,000'
     },
     {
