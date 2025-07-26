@@ -16,7 +16,7 @@ const PopularDestinations = () => {
     {
       name: 'Arusha',
       properties: '85+',
-      image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDEbjZsTN0N119e1Ti8sPMdX7cT--hzcBIOg&s',
       price: 'TSh 40,000'
     },
     {
