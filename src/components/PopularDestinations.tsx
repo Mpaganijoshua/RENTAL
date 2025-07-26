@@ -10,7 +10,7 @@ const PopularDestinations = () => {
     {
       name: 'Dar es Salaam',
       properties: '120+',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Dar_es_Salaam_-_Posta.jpg/1024px-Dar_es_Salaam_-_Posta.jpg',
       price: 'TSh 30,000'
     },
     {
